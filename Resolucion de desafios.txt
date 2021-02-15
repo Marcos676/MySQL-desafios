@@ -1,0 +1,121 @@
+--------- JUEGO DE MySQL -------------
+DESAFIO 1
+
+1) Gunn
+SELECT * FROM movies_db.actors;
+
+2) Parque
+SELECT title, awards FROM movies_db.movies;
+
+3) Titanic
+WHERE title = "Titanic";
+
+4) 4
+SELECT genre_id FROM movies_db.series
+WHERE title = "Person of interest";
+
+5) 46
+SELECT season_id 
+FROM movies_db.episodes
+WHERE number = 2;
+
+-----------------------------------------------------------------
+
+DESAFIO 2
+
+1)  Guerra
+SELECT * FROM movies_db.movies
+WHERE release_date > 1999;
+
+2) Hotel 
+SELECT * 
+FROM movies_db.movies
+WHERE title LIKE "%a";
+
+3) 3
+SELECT COUNT(*) FROM movies_db.actors
+WHERE first_name = "Jim";
+
+4) 13
+SELECT SUM(awards) FROM movies_db.movies
+WHERE title LIKE "La Guerra de las galaxias%";
+
+5) de
+SELECT  title
+FROM actors
+INNER JOIN movies ON favorite_movie_id = movies.id
+WHERE first_name = "Leonardo" AND last_name = "Di Caprio";
+
+--------------------------------------------------------------
+
+DESAFIO 3
+
+1) Titanic
+SELECT  title, movies.id
+FROM actors
+INNER JOIN movies ON favorite_movie_id = movies.id
+WHERE actors.rating = 2.3
+ORDER BY movies.id;
+
+2) Fantasia
+SELECT genres.name, title
+FROM movies_db.series
+INNER JOIN genres ON genre_id = genres.id;
+
+
+3)Intensamente
+SELECT * FROM movies_db.movies
+INNER JOIN genres ON genre_id = genres.id
+WHERE name = "Animacion";
+
+4) Dern
+SELECT  last_name
+FROM actor_movie
+INNER JOIN actors ON actor_id = actors.id
+INNER JOIN movies ON movie_id = movies.id
+WHERE movies.title = "Parque Jurásico";
+
+5) Mi
+SELECT  title, name, rating
+FROM movies
+INNER JOIN genres ON genre_id = genres.id
+WHERE rating BETWEEN 1 AND 4;
+
+----------------------------------------------------------------
+
+DESAFIO 4
+
+1)Infantiles
+SELECT genres.name , AVG(length)
+FROM movies
+INNER JOIN genres ON genre_id = genres.id
+GROUP BY length;
+
+2) Emma
+SELECT first_name , COUNT(*) AS "Total de peliculas"
+FROM actor_movie
+INNER JOIN actors ON actor_id = actors.id
+INNER JOIN movies ON movie_id = movies.id
+GROUP BY first_name
+ORDER BY COUNT(*) DESC;
+
+3) 5
+SELECT name , COUNT(*) 
+FROM movies
+INNER JOIN genres ON genre_id = genres.id
+GROUP BY genres.id
+ORDER BY COUNT(*) DESC;
+
+4) 5
+SELECT name , COUNT(*) 
+FROM movies
+INNER JOIN genres ON genre_id = genres.id
+GROUP BY genres.name
+HAVING COUNT(*)  > 3;
+
+5) 6
+SELECT name , AVG(rating)
+FROM movies
+INNER JOIN genres ON genre_id = genres.id
+GROUP BY genres.name
+HAVING AVG(rating)  > 3;
